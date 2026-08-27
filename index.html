@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Sócio Torcedor Renascer FC | Vista essa camisa</title>
+<meta name="description" content="Seja sócio torcedor do Renascer Futebol Clube. Escolha seu plano, garanta seus benefícios exclusivos e faça parte da família Renascer.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1440' stroke='%23f4c220' stroke-width='4'/><text x='50' y='62' text-anchor='middle' font-family='Arial, sans-serif' font-size='42' font-weight='900' fill='%23ffd54a'>R</text><path d='M50 12l4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9L37 21l9-1z' fill='%23ffd54a'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#050b24;
+    --navy-900:#0a1440;
+    --navy-800:#101d5c;
+    --navy-700:#16277a;
+    --blue-600:#1c3aa8;
+    --blue-500:#2748c9;
+    --gold-400:#ffd54a;
+    --gold-500:#f4c220;
+    --gold-600:#d9a30a;
+    --white:#ffffff;
+    --ink:#0b1030;
+    --muted:#8b93c4;
+    --card-bg:#ffffff;
+    --success:#2ecc71;
+    --shadow-lg: 0 30px 60px -20px rgba(5,11,36,.55);
+    --shadow-md: 0 15px 35px -12px rgba(5,11,36,.35);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    background:var(--white);
+    color:var(--ink);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  input,select{font-family:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px;}
+  h1,h2,h3,h4{font-family:'Anton', 'Inter', sans-serif; font-weight:400; letter-spacing:.5px; line-height:1.08;}
+  .eyebrow{
+    font-family:'Inter',sans-serif; font-weight:800; letter-spacing:2.5px; text-transform:uppercase;
+    font-size:12px; color:var(--gold-500);
+  }
+  .gradient-bar{
+    height:5px; width:100%;
+    background:linear-gradient(90deg, var(--gold-400), var(--gold-600) 25%, var(--blue-600) 60%, var(--navy-900) 100%);
+  }
+  /* ============ REVEAL ANIM ============ */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal.d1{transition-delay:.08s;}
+  .reveal.d2{transition-delay:.16s;}
+  .reveal.d3{transition-delay:.24s;}
+  .reveal.d4{transition-delay:.32s;}
+
+  /* ============ HEADER ============ */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    padding:14px 0;
+    transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  header.scrolled{
+    background:rgba(5,11,36,.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px -15px rgba(0,0,0,.5);
+    padding:9px 0;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{width:42px; height:42px; border-radius:50%;}
+  .brand-name{color:var(--white); font-family:'Anton',sans-serif; font-size:16px; letter-spacing:.5px; line-height:1.1;}
+  .brand-name span{display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:9.5px; color:var(--gold-400); letter-spacing:2px; text-transform:uppercase;}
+  .header-cta{
+    display:none;
+  }
+  @media(min-width:860px){
+    .header-cta{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--gold-500); color:var(--navy-950); font-weight:800; font-size:14px;
+      padding:11px 22px; border-radius:999px; transition:transform .2s ease, box-shadow .2s ease;
+      box-shadow:0 8px 20px -6px rgba(244,194,32,.6);
+    }
+    .header-cta:hover{transform:translateY(-2px); box-shadow:0 12px 24px -6px rgba(244,194,32,.75);}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1100px 550px at 15% -10%, rgba(39,72,201,.55), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(244,194,32,.18), transparent 55%),
+      linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+    padding:118px 0 64px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size:22px 22px;
+    mask-image:linear-gradient(180deg, transparent, rgba(0,0,0,.6) 30%, transparent 85%);
+    opacity:.5;
+    pointer-events:none;
+  }
+  .hero-glow{
+    position:absolute; width:640px; height:640px; border-radius:50%;
+    background:radial-gradient(circle, rgba(244,194,32,.28), transparent 65%);
+    top:-220px; right:-180px; filter:blur(10px);
+    animation:float 9s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0) scale(1);}
+    50%{transform:translateY(30px) scale(1.05);}
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-grid{
+    display:grid; grid-template-columns:1fr; gap:44px; align-items:start;
+  }
+  @media(min-width:960px){
+    .hero-grid{grid-template-columns:1.05fr .95fr; gap:36px; align-items:center;}
+  }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    color:var(--gold-400); font-weight:700; font-size:12.5px; letter-spacing:1px; text-transform:uppercase;
+    padding:8px 16px; border-radius:999px; margin-bottom:22px;
+    backdrop-filter:blur(6px);
+  }
+  .hero-badge .dot{width:7px; height:7px; border-radius:50%; background:var(--gold-500); box-shadow:0 0 0 4px rgba(244,194,32,.25);}
+  .hero h1{
+    color:var(--white); font-size:clamp(34px, 6vw, 58px); margin-bottom:18px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg, var(--gold-400), var(--gold-600));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lead{
+    color:var(--muted); font-size:17px; max-width:520px; margin-bottom:28px;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; gap:26px; margin-top:8px;
+  }
+  .hero-stats .stat{min-width:110px;}
+  .hero-stats .num{
+    color:var(--white); font-family:'Anton',sans-serif; font-size:26px; letter-spacing:.5px;
+  }
+  .hero-stats .num span{color:var(--gold-400);}
+  .hero-stats .label{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-top:2px;}
+
+  /* ============ LEAD FORM CARD ============ */
+  .lead-card{
+    background:var(--card-bg);
+    border-radius:var(--radius-lg);
+    padding:28px 26px 26px;
+    box-shadow:var(--shadow-lg);
+    position:relative;
+    border:1px solid rgba(255,255,255,.6);
+  }
+  .lead-card::before{
+    content:"";
+    position:absolute; inset:-2px; z-index:-1; border-radius:calc(var(--radius-lg) + 2px);
+    background:linear-gradient(135deg, var(--gold-400), var(--blue-600));
+    opacity:.9;
+  }
+  .lead-card .tag{
+    display:inline-block; background:rgba(244,194,32,.14); color:var(--gold-600);
+    font-weight:800; font-size:11.5px; text-transform:uppercase; letter-spacing:1px;
+    padding:6px 12px; border-radius:999px; margin-bottom:12px;
+  }
+  .lead-card h3{font-family:'Inter',sans-serif; font-weight:800; font-size:21px; color:var(--ink); margin-bottom:6px;}
+  .lead-card p.sub{color:#5a6088; font-size:13.5px; margin-bottom:20px;}
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block; font-size:12px; font-weight:700; color:#42476b; margin-bottom:6px; text-transform:uppercase; letter-spacing:.4px;
+  }
+  .field input, .field select{
+    width:100%; padding:13px 14px; border-radius:var(--radius-sm);
+    border:1.5px solid #e3e5f0; background:#f7f8fc; font-size:15px; color:var(--ink);
+    transition:border-color .2s ease, background .2s ease;
+    appearance:none; -webkit-appearance:none;
+  }
+  .field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23555a80' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+  }
+  .field input:focus, .field select:focus{
+    outline:none; border-color:var(--blue-500); background:#fff;
+    box-shadow:0 0 0 4px rgba(39,72,201,.12);
+  }
+  .plan-toggle{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;
+  }
+  .plan-toggle input{display:none;}
+  .plan-toggle label{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    border:1.5px solid #e3e5f0; border-radius:var(--radius-sm); padding:10px 8px; cursor:pointer;
+    transition:all .2s ease; text-align:center;
+  }
+  .plan-toggle label .pname{font-weight:800; font-size:13.5px; color:var(--ink);}
+  .plan-toggle label .pprice{font-size:12px; color:#6a6f97; font-weight:600;}
+  .plan-toggle input:checked + label{
+    border-color:var(--gold-500); background:rgba(244,194,32,.1);
+    box-shadow:0 0 0 3px rgba(244,194,32,.18);
+  }
+  .btn-submit{
+    width:100%; padding:16px; border-radius:999px; font-weight:800; font-size:15.5px;
+    background:linear-gradient(90deg, #25d366, #1fb655); color:#fff;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    box-shadow:0 14px 26px -10px rgba(37,211,102,.6);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-submit:hover{transform:translateY(-2px); box-shadow:0 18px 32px -10px rgba(37,211,102,.72);}
+  .btn-submit:active{transform:translateY(0);}
+  .btn-submit svg{width:19px; height:19px;}
+  .lead-card .fineprint{font-size:11.5px; color:#8b8fb0; text-align:center; margin-top:12px;}
+  .form-msg{font-size:13px; font-weight:700; margin-top:10px; text-align:center; display:none;}
+  .form-msg.show{display:block;}
+  .form-msg.err{color:#e0455a;}
+
+  /* ============ SECTION SHARED ============ */
+  section{position:relative;}
+  .section-pad{padding:78px 0;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 46px;}
+  .section-head h2{font-size:clamp(28px,4.4vw,42px); color:var(--navy-950); margin:12px 0 14px;}
+  .section-head p{color:#5a6088; font-size:16px;}
+  .section-head .eyebrow{display:inline-flex; align-items:center; gap:8px;}
+  .section-head .eyebrow::before, .section-head .eyebrow::after{content:""; width:22px; height:2px; background:var(--gold-500);}
+
+  /* ============ ABOUT ============ */
+  .about{background:#f7f8fc;}
+  .about-grid{
+    display:grid; grid-template-columns:1fr; gap:36px; align-items:center;
+  }
+  @media(min-width:900px){ .about-grid{grid-template-columns:.85fr 1.15fr;} }
+  .about-badge-wrap{
+    display:flex; justify-content:center;
+  }
+  .about-badge{
+    position:relative; width:min(280px, 80vw); aspect-ratio:1/1; border-radius:50%;
+    background:radial-gradient(circle at 30% 25%, var(--blue-500), var(--navy-950) 72%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-lg);
+  }
+  .about-badge img{width:72%;}
+  .about-badge::after{
+    content:""; position:absolute; inset:-10px; border-radius:50%;
+    border:2px dashed rgba(244,194,32,.5);
+    animation:spin 26s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .about-copy h3{font-size:14px; text-transform:uppercase; letter-spacing:1.5px; color:var(--blue-600); font-weight:800; margin-bottom:10px; font-family:'Inter',sans-serif;}
+  .about-copy h2{font-size:clamp(26px,3.6vw,36px); color:var(--navy-950); margin-bottom:16px;}
+  .about-copy p{color:#4b5077; font-size:15.5px; margin-bottom:14px;}
+  .about-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
+  .chip{
+    display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid #e6e8f4;
+    padding:9px 15px; border-radius:999px; font-size:13px; font-weight:700; color:var(--navy-900);
+    box-shadow:0 4px 12px -6px rgba(16,29,92,.15);
+  }
+  .chip svg{width:15px; height:15px; color:var(--gold-600);}
+
+  /* ============ BENEFITS ============ */
+  .benefits-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px;
+  }
+  .benefit-card{
+    background:#fff; border:1px solid #edeef6; border-radius:var(--radius-md);
+    padding:26px 22px; box-shadow:var(--shadow-md); transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .benefit-card:hover{transform:translateY(-6px); box-shadow:0 22px 40px -18px rgba(16,29,92,.28);}
+  .benefit-ic{
+    width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--gold-400), var(--gold-600)); margin-bottom:16px;
+  }
+  .benefit-ic svg{width:24px; height:24px; color:var(--navy-950);}
+  .benefit-card h4{font-family:'Inter',sans-serif; font-weight:800; font-size:16.5px; color:var(--navy-950); margin-bottom:8px;}
+  .benefit-card p{color:#5a6088; font-size:14px;}
+
+  /* ============ PLANS ============ */
+  .plans{
+    background:linear-gradient(180deg, var(--navy-950), var(--navy-900));
+    position:relative;
+  }
+  .plans::before{
+    content:""; position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:24px 24px; opacity:.5; pointer-events:none;
+  }
+  .plans .section-head h2{color:#fff;}
+  .plans .section-head p{color:var(--muted);}
+  .plans-grid{
+    display:grid; grid-template-columns:1fr; gap:26px; max-width:840px; margin:0 auto;
+    position:relative; z-index:1;
+  }
+  @media(min-width:760px){ .plans-grid{grid-template-columns:1fr 1fr; align-items:start;} }
+  .plan-card{
+    background:#fff; border-radius:var(--radius-lg); padding:32px 26px; position:relative;
+    box-shadow:var(--shadow-lg); transition:transform .3s ease;
+  }
+  .plan-card:hover{transform:translateY(-8px);}
+  .plan-card.featured{
+    border:3px solid var(--gold-500);
+    transform:scale(1.03);
+  }
+  .plan-card.featured:hover{transform:scale(1.03) translateY(-8px);}
+  @media(max-width:759px){ .plan-card.featured{transform:none;} .plan-card.featured:hover{transform:translateY(-6px);} }
+  .plan-ribbon{
+    position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(90deg, var(--gold-400), var(--gold-600)); color:var(--navy-950);
+    font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:1px;
+    padding:7px 18px; border-radius:999px; box-shadow:0 8px 18px -8px rgba(244,194,32,.7);
+    white-space:nowrap;
+  }
+  .plan-name{font-family:'Anton',sans-serif; font-size:24px; letter-spacing:.5px; color:var(--navy-950); margin-bottom:4px;}
+  .plan-tagline{color:#7a7fa3; font-size:13px; font-weight:600; margin-bottom:18px;}
+  .plan-price{display:flex; align-items:baseline; gap:6px; margin-bottom:22px;}
+  .plan-price .curr{font-size:16px; font-weight:800; color:var(--navy-900);}
+  .plan-price .amount{font-family:'Anton',sans-serif; font-size:42px; color:var(--navy-950);}
+  .plan-price .period{font-size:13px; color:#7a7fa3; font-weight:600;}
+  .plan-benefits{margin-bottom:24px;}
+  .plan-benefits li{
+    display:flex; align-items:flex-start; gap:10px; font-size:14.5px; color:#33375a; margin-bottom:12px; font-weight:500;
+  }
+  .plan-benefits li svg{width:19px; height:19px; flex-shrink:0; color:#1fb655; margin-top:1px;}
+  .plan-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    padding:14px; border-radius:999px; font-weight:800; font-size:14.5px;
+    background:var(--navy-950); color:#fff; transition:all .25s ease;
+  }
+  .plan-btn:hover{background:var(--blue-600); transform:translateY(-2px);}
+  .plan-card.featured .plan-btn{
+    background:linear-gradient(90deg,#25d366,#1fb655);
+    box-shadow:0 14px 26px -10px rgba(37,211,102,.55);
+  }
+  .plan-card.featured .plan-btn:hover{filter:brightness(1.06);}
+  .plan-btn svg{width:17px; height:17px;}
+
+  /* payment methods */
+  .pay-methods{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:44px; position:relative; z-index:1;
+  }
+  .pay-chip{
+    display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+    color:#dfe1f5; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:700; backdrop-filter:blur(6px);
+  }
+  .pay-chip svg{width:17px; height:17px; color:var(--gold-400);}
+
+  /* ============ FAQ ============ */
+  .faq-list{max-width:760px; margin:0 auto;}
+  .faq-item{
+    border-bottom:1px solid #e9eaf4; padding:6px 0;
+  }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:18px 4px; font-weight:700; font-size:15.5px; color:var(--navy-950);
+  }
+  .faq-q .plus{
+    width:26px; height:26px; border-radius:50%; background:#f1f2fb; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; transition:transform .3s ease, background .3s ease;
+  }
+  .faq-q .plus svg{width:13px; height:13px; color:var(--navy-900);}
+  .faq-item.open .plus{transform:rotate(135deg); background:var(--gold-500);}
+  .faq-item.open .plus svg{color:var(--navy-950);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .faq-a p{padding:0 4px 20px; color:#5a6088; font-size:14.5px; line-height:1.65;}
+
+  /* ============ FINAL CTA ============ */
+  .final-cta{
+    background:linear-gradient(120deg, var(--gold-400), var(--gold-600));
+    padding:66px 0;
+    text-align:center;
+  }
+  .final-cta h2{color:var(--navy-950); font-size:clamp(26px,4.5vw,40px); margin-bottom:14px;}
+  .final-cta p{color:#4a3b06; font-size:16px; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; font-weight:600;}
+  .btn-dark{
+    display:inline-flex; align-items:center; gap:10px; background:var(--navy-950); color:#fff;
+    padding:17px 34px; border-radius:999px; font-weight:800; font-size:15.5px;
+    box-shadow:0 16px 30px -12px rgba(5,11,36,.5); transition:transform .25s ease;
+  }
+  .btn-dark:hover{transform:translateY(-3px);}
+  .btn-dark svg{width:19px; height:19px;}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--navy-950); padding:46px 0 110px; color:#9aa0cc;}
+  @media(min-width:760px){ footer{padding-bottom:46px;} }
+  .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:26px; align-items:flex-start; padding-bottom:26px; border-bottom:1px solid rgba(255,255,255,.08);}
+  .footer-brand{display:flex; align-items:center; gap:12px;}
+  .footer-brand img{width:46px; height:46px; border-radius:50%;}
+  .footer-brand strong{color:#fff; font-family:'Anton',sans-serif; font-size:16px; display:block;}
+  .footer-brand span{font-size:12px; color:var(--gold-400); font-weight:700; letter-spacing:1px; text-transform:uppercase;}
+  .footer-links{display:flex; gap:34px; flex-wrap:wrap;}
+  .footer-col h5{color:#fff; font-size:12.5px; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:800;}
+  .footer-col a{display:block; font-size:13.5px; color:#9aa0cc; margin-bottom:9px; transition:color .2s ease;}
+  .footer-col a:hover{color:var(--gold-400);}
+  .footer-bottom{padding-top:22px; text-align:center; font-size:12.5px; color:#6a70a0;}
+
+  /* ============ MOBILE STICKY BAR ============ */
+  .sticky-cta{
+    position:fixed; left:0; right:0; bottom:0; z-index:250;
+    background:rgba(6,12,40,.97); backdrop-filter:blur(10px);
+    padding:12px 16px; display:flex; align-items:center; gap:12px;
+    box-shadow:0 -10px 30px -12px rgba(0,0,0,.5);
+    transform:translateY(120%); transition:transform .35s ease;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .sticky-cta.show{transform:translateY(0);}
+  .sticky-cta .info{flex:1; min-width:0;}
+  .sticky-cta .info strong{display:block; color:#fff; font-size:13px; font-weight:800;}
+  .sticky-cta .info span{color:var(--gold-400); font-size:11.5px; font-weight:700;}
+  .sticky-cta a.btn-submit{width:auto; padding:12px 20px; font-size:13.5px; white-space:nowrap;}
+  @media(min-width:760px){ .sticky-cta{display:none;} }
+
+  /* ============ MISC ============ */
+  ::selection{background:var(--gold-400); color:var(--navy-950);}
+</style>
+<noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1440' stroke='%23f4c220' stroke-width='4'/><text x='50' y='62' text-anchor='middle' font-family='Arial, sans-serif' font-size='42' font-weight='900' fill='%23ffd54a'>R</text><path d='M50 12l4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9L37 21l9-1z' fill='%23ffd54a'/></svg>" alt="Escudo Renascer Futebol Clube">
+      <div class="brand-name">Renascer F.C.<span>Sócio Torcedor</span></div>
+    </a>
+    <a class="header-cta" href="#planos">Quero ser sócio</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO + FORM (PRIMEIRA DOBRA) ============ -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-badge reveal in"><span class="dot"></span> Desde 2013 · Bicampeão 2023 e 2024</div>
+          <h1 class="reveal in">Vista a camisa.<br>Torça <em>de dentro</em> do Renascer.</h1>
+          <p class="lead reveal in">Se você é da várzea, sabe: o Renascer é mais que um time, é família. Como Sócio Torcedor você apoia direto o clube e ganha benefícios exclusivos — camisa, carteirinha e muito mais.</p>
+          <div class="hero-stats reveal in">
+            <div class="stat">
+              <div class="num">+6<span>mil</span></div>
+              <div class="label">Torcedores</div>
+            </div>
+            <div class="stat">
+              <div class="num"><span>13</span> anos</div>
+              <div class="label">De história</div>
+            </div>
+            <div class="stat">
+              <div class="num"><span>2x</span></div>
+              <div class="label">Campeão</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lead-card reveal in" id="leadForm">
+          <span class="tag">Garanta sua vaga</span>
+          <h3>Quero ser Sócio Torcedor</h3>
+          <p class="sub">Preencha e fale direto com a gente no WhatsApp.</p>
+          <form id="formSocio" novalidate>
+            <div class="field">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="field">
+              <label for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 90000-0000" required>
+            </div>
+            <div class="field">
+              <label>Escolha seu plano</label>
+              <div class="plan-toggle">
+                <input type="radio" name="plano" id="planoOuroRadio" value="Ouro - R$109,90" checked>
+                <label for="planoOuroRadio">
+                  <span class="pname">🥇 Ouro</span>
+                  <span class="pprice">R$ 109,90/mês</span>
+                </label>
+                <input type="radio" name="plano" id="planoPrataRadio" value="Prata - R$59,90">
+                <label for="planoPrataRadio">
+                  <span class="pname">🥈 Prata</span>
+                  <span class="pprice">R$ 59,90/mês</span>
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.2-.6-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+              Quero ser sócio agora
+            </button>
+            <div class="form-msg" id="formMsg"></div>
+          </form>
+          <p class="fineprint">Ao enviar, você será direcionado ao nosso WhatsApp oficial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gradient-bar"></div>
+
+  <!-- ============ SOBRE O CLUBE ============ -->
+  <section class="about section-pad">
+    <div class="wrap about-grid">
+      <div class="about-badge-wrap reveal">
+        <div class="about-badge">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1440' stroke='%23f4c220' stroke-width='4'/><text x='50' y='62' text-anchor='middle' font-family='Arial, sans-serif' font-size='42' font-weight='900' fill='%23ffd54a'>R</text><path d='M50 12l4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9L37 21l9-1z' fill='%23ffd54a'/></svg>" alt="Escudo Renascer Futebol Clube">
+        </div>
+      </div>
+      <div class="about-copy reveal d1">
+        <h3>Nossa história</h3>
+        <h2>Mais que um time, uma família.</h2>
+        <p>O Renascer Futebol Clube nasceu em 2013 na várzea e se tornou orgulho da comunidade. Treze anos de luta, conquistas e transformação através do futebol — bicampeão nas últimas temporadas e cada vez mais forte graças à torcida que nunca deixou de acreditar.</p>
+        <p>Ser Sócio Torcedor é fazer parte oficial dessa história: contribuir com o crescimento do clube e receber de volta o reconhecimento que só quem veste essa camisa entende.</p>
+        <div class="about-chips">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/></svg>Fundado em 2013</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 6.9 7.4.3-5.8 4.7 2 7.1-6.2-4.2L5.8 21l2-7.1L2 9.2l7.4-.3z"/></svg>Bicampeão 2023/2024</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>+6 mil torcedores no Instagram</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE SER SÓCIO ============ -->
+  <section class="section-pad" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Vantagens</span>
+        <h2>Por que ser Sócio Torcedor?</h2>
+        <p>Mais que benefícios, é o seu jeito de vestir a camisa todos os dias do ano.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/></svg></div>
+          <h4>Pertencimento oficial</h4>
+          <p>Seu nome ligado oficialmente à história do clube que você ama torcer.</p>
+        </div>
+        <div class="benefit-card reveal d1">
+          <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v14a2 2 0 0 0 2 2h14v-4M18 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg></div>
+          <h4>Benefícios exclusivos</h4>
+          <p>Camisa, carteirinha personalizada e vantagens que só sócio tem acesso.</p>
+        </div>
+        <div class="benefit-card reveal d2">
+          <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H4v-2a4 4 0 0 1 3-3.87m5-4a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-6 8v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <h4>Comunidade Renascer</h4>
+          <p>Jogos entre sócios, encontros e uma torcida que é praticamente família.</p>
+        </div>
+        <div class="benefit-card reveal d3">
+          <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4zM4 12h16M4 20h16M8 4v16"/></svg></div>
+          <h4>Você ajuda o clube a crescer</h4>
+          <p>Sua contribuição mensal sustenta a estrutura, o transporte e o futuro do Renascer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLANOS ============ -->
+  <section class="section-pad plans" id="planos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="color:var(--gold-400);">Planos</span>
+        <h2>Escolha seu plano de sócio</h2>
+        <p>Dois jeitos de vestir essa camisa. Escolha o seu e faça parte agora.</p>
+      </div>
+
+      <div class="plans-grid">
+        <!-- PLANO PRATA -->
+        <div class="plan-card reveal">
+          <div class="plan-name">🥈 Plano Prata</div>
+          <div class="plan-tagline">Pra quem quer começar a fazer parte</div>
+          <div class="plan-price">
+            <span class="curr">R$</span><span class="amount">59,90</span><span class="period">/mês</span>
+          </div>
+          <ul class="plan-benefits">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Camisa exclusiva do clube</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Carteirinha personalizada</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Transporte para todos os jogos do clube no ano</li>
+          </ul>
+          <a href="#" class="plan-btn" data-plano="Prata - R$59,90">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.2-.6-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Quero o Plano Prata
+          </a>
+        </div>
+
+        <!-- PLANO OURO -->
+        <div class="plan-card featured reveal d1">
+          <div class="plan-ribbon">★ Mais escolhido</div>
+          <div class="plan-name">🥇 Plano Ouro</div>
+          <div class="plan-tagline">A experiência completa de sócio</div>
+          <div class="plan-price">
+            <span class="curr">R$</span><span class="amount">109,90</span><span class="period">/mês</span>
+          </div>
+          <ul class="plan-benefits">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Camisa e boné exclusivos do clube</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Carteirinha personalizada de sócio</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Jogo semanal entre os sócios</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Transporte para todos os jogos do clube no ano</li>
+          </ul>
+          <a href="#" class="plan-btn" data-plano="Ouro - R$109,90">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.2-.6-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Quero o Plano Ouro
+          </a>
+        </div>
+      </div>
+
+      <div class="pay-methods reveal d2">
+        <span class="pay-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.9 2 4 9.9v4.2L11.9 22l7.9-7.9V9.9L11.9 2zm0 3.4 5.2 5.2h-3v4.6h-4.4v-4.6h-3l5.2-5.2z"/></svg> Pix</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 4h18v3H3V4zm0 5h4v11H3V9zm6 0h12v11H9V9z"/></svg> Boleto</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Débito</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg> Crédito</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section-pad" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Dúvidas</span>
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open">
+          <div class="faq-q">Como funciona o pagamento?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></div>
+          <div class="faq-a"><p>Você pode pagar via Pix, boleto, débito ou crédito. A mensalidade é cobrada todo mês, garantindo seus benefícios ativos durante todo o ano.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Como recebo a camisa e a carteirinha?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></div>
+          <div class="faq-a"><p>Depois da confirmação do cadastro, nossa equipe entra em contato pelo WhatsApp para combinar retirada ou entrega da camisa e da carteirinha personalizada.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Qual a diferença entre os planos?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></div>
+          <div class="faq-a"><p>O Plano Prata inclui camisa, carteirinha e transporte para os jogos. O Plano Ouro tem tudo isso, além de boné exclusivo e participação no jogo semanal entre sócios.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Posso cancelar quando quiser?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></div>
+          <div class="faq-a"><p>Sim. Fale com a gente pelo WhatsApp e ajudamos você com o cancelamento, sem burocracia.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Como falo com o clube em caso de dúvida?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></div>
+          <div class="faq-a"><p>É só chamar no nosso WhatsApp oficial (11) 4752-2959 — respondemos rapidinho!</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="final-cta">
+    <div class="wrap reveal">
+      <h2>Pronto pra vestir essa camisa?</h2>
+      <p>Junte-se a mais de 6 mil torcedores que já fazem parte da história do Renascer F.C.</p>
+      <a href="#leadForm" class="btn-dark">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.2-.6-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        Quero ser sócio torcedor
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1440' stroke='%23f4c220' stroke-width='4'/><text x='50' y='62' text-anchor='middle' font-family='Arial, sans-serif' font-size='42' font-weight='900' fill='%23ffd54a'>R</text><path d='M50 12l4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9L37 21l9-1z' fill='%23ffd54a'/></svg>" alt="Escudo Renascer Futebol Clube">
+          <div>
+            <strong>Renascer Futebol Clube</strong>
+            <span>Fundado em 2013</span>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>Sócio Torcedor</h5>
+            <a href="#planos">Plano Ouro</a>
+            <a href="#planos">Plano Prata</a>
+            <a href="#leadForm">Cadastro</a>
+          </div>
+          <div class="footer-col">
+            <h5>Contato</h5>
+            <a href="https://wa.me/551147522959" target="_blank" rel="noopener">WhatsApp (11) 4752-2959</a>
+            <a href="https://www.instagram.com/renascerfc2013/" target="_blank" rel="noopener">Instagram @renascerfc2013</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Renascer Futebol Clube · Sócio Torcedor. Mais que um time, uma família.</div>
+    </div>
+  </footer>
+</main>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="info">
+    <strong>Vista essa camisa</strong>
+    <span>A partir de R$ 59,90/mês</span>
+  </div>
+  <a href="#leadForm" class="btn-submit" style="text-decoration:none;">Quero ser sócio</a>
+</div>
+
+<script>
+(function(){
+  // ---- CONFIG ----
+  var WHATSAPP_NUMBER = "551147522959";
+  var GOOGLE_SHEETS_URL = "GOOGLE_SHEETS_WEBAPP_URL_AQUI"; // será substituído após autorização
+
+  // ---- HEADER SCROLL ----
+  var header = document.getElementById('siteHeader');
+  var stickyCta = document.getElementById('stickyCta');
+  var heroEl = document.querySelector('.hero');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    if(y > 40){ header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+    var heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
+    if(y > heroBottom){ stickyCta.classList.add('show'); } else { stickyCta.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // ---- REVEAL ON SCROLL ----
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.05, rootMargin:'0px 0px -5% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+  // Safety net: never let content stay permanently invisible (fast scroll / JS timing edge cases)
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 2500);
+
+  // ---- FAQ ACCORDION ----
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    if(item.classList.contains('open')){ a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---- PLAN BUTTONS -> scroll to form + preselect ----
+  document.querySelectorAll('.plan-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var plano = btn.getAttribute('data-plano');
+      if(plano.indexOf('Ouro') === 0){
+        document.getElementById('planoOuroRadio').checked = true;
+      } else {
+        document.getElementById('planoPrataRadio').checked = true;
+      }
+      document.getElementById('leadForm').scrollIntoView({behavior:'smooth', block:'center'});
+      var nomeInput = document.getElementById('nome');
+      setTimeout(function(){ nomeInput.focus(); }, 450);
+    });
+  });
+
+  // ---- FORM SUBMIT ----
+  var form = document.getElementById('formSocio');
+  var formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nome = document.getElementById('nome').value.trim();
+    var whatsapp = document.getElementById('whatsapp').value.trim();
+    var planoRadio = document.querySelector('input[name="plano"]:checked');
+    var plano = planoRadio ? planoRadio.value : '';
+
+    if(nome.length < 2){
+      showMsg('Por favor, preencha seu nome completo.', true);
+      return;
+    }
+    var digits = whatsapp.replace(/\D/g,'');
+    if(digits.length < 10){
+      showMsg('Informe um WhatsApp válido com DDD.', true);
+      return;
+    }
+
+    var submitBtn = form.querySelector('.btn-submit');
+    submitBtn.style.opacity = '.7';
+    submitBtn.style.pointerEvents = 'none';
+
+    // Envia para a planilha (Google Sheets) sem bloquear o redirecionamento
+    if(GOOGLE_SHEETS_URL.indexOf('http') === 0){
+      try{
+        fetch(GOOGLE_SHEETS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type':'text/plain;charset=utf-8'},
+          body: JSON.stringify({nome:nome, whatsapp:whatsapp, plano:plano, origem:'LP Socio Torcedor'})
+        });
+      }catch(err){}
+    }
+
+    var rawMsg = "Olá! Quero ser Sócio Torcedor do Renascer F.C.\n\n*Nome:* " + nome +
+               "\n*WhatsApp:* " + whatsapp +
+               "\n*Plano de interesse:* " + plano;
+    var waUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(rawMsg);
+
+    showMsg('Redirecionando para o WhatsApp...', false);
+    setTimeout(function(){
+      window.open(waUrl, '_blank');
+      submitBtn.style.opacity = '1';
+      submitBtn.style.pointerEvents = 'auto';
+    }, 500);
+  });
+
+  function showMsg(text, isErr){
+    formMsg.textContent = text;
+    formMsg.classList.add('show');
+    formMsg.classList.toggle('err', !!isErr);
+  }
+
+  // ---- WHATSAPP MASK (simples) ----
+  var waInput = document.getElementById('whatsapp');
+  waInput.addEventListener('input', function(){
+    var v = waInput.value.replace(/\D/g,'').slice(0,11);
+    if(v.length > 6){
+      v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+    } else if(v.length > 2){
+      v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+    } else if(v.length > 0){
+      v = '(' + v;
+    }
+    waInput.value = v;
+  });
+})();
+</script>
+
+</body>
+</html>
